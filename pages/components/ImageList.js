@@ -2,8 +2,8 @@ import styled from "styled-components";
 import Image from "next/image";
 
 const ImageWrapper = styled.div`
-  width: 160px;
-  height: 160px;
+  width: auto;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,8 +37,8 @@ const ImageList = () => {
             <Image
               src={src}
               alt={`My Image ${i + 1}`}
-              width={150}
-              height={150}
+              width={170}
+              height={170}
               priority={i < 3}
             />
           </ImageWrapper>
