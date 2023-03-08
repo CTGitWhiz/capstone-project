@@ -32,7 +32,7 @@ const ImageList = () => {
   return (
     <ImageListWrapper>
       {images.map((src, i) => {
-        const id = `image-${i + 1}`; // generate a unique id
+        const id = `image${i + 1}`; // generate a unique id
         return (
           <ImageWrapper key={id}>
             <Image
