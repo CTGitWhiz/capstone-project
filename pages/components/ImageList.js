@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
+import { uid } from "uid";
 
 const ImageWrapper = styled.div`
   width: auto;
@@ -29,7 +30,7 @@ const ImageList = () => {
   return (
     <ImageListWrapper>
       {images.map((src, i) => {
-        const id = `image${i + 1}`; // generate a unique id
+        const id = uid(); // generate a unique id
         return (
           <ImageWrapper key={id}>
             <Image
