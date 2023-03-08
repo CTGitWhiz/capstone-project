@@ -26,14 +26,15 @@ const ImageListWrapper = styled.div`
 const ImageList = () => {
   const images = Array.from(
     { length: 20 },
-    (_, i) => `/../public/Images/image${i + 1}.png`
+    (_, i) => `/Images/image${i + 1}.png`
   );
 
   return (
     <ImageListWrapper>
       {images.map((src, i) => {
+        const id = `image-${i + 1}`; // generate a unique id
         return (
-          <ImageWrapper key={i}>
+          <ImageWrapper key={id}>
             <Image
               src={src}
               alt={`My Image ${i + 1}`}
