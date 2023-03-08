@@ -24,10 +24,7 @@ const ImageListWrapper = styled.div`
 `;
 
 const ImageList = () => {
-  const images = Array.from(
-    { length: 20 },
-    (_, i) => `/Images/image${i + 1}.png`
-  );
+  const images = Array.from({ length: 20 }, (_, i) => `/image${i + 1}.png`);
 
   return (
     <ImageListWrapper>
