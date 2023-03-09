@@ -20,7 +20,11 @@ const ImageListWrapper = styled.div`
   align-items: center;
   padding: 10px;
   margin: 10px;
-  box-shadow: 0 0 0 3px black;
+  box-shadow: 0 0 10px rgba(128, 128, 128, 0.5),
+    0 0 20px rgba(128, 128, 128, 0.4), 0 0 30px rgba(128, 128, 128, 0.3),
+    0 0 40px rgba(128, 128, 128, 0.2), 0 0 50px rgba(128, 128, 128, 0.1),
+    0 0 60px rgba(128, 128, 128, 0), 0 0 70px rgba(255, 255, 255, 0);
+  background: linear-gradient(to bottom, #444444, #ffffff);
 `;
 
 const ImageList = () => {
