@@ -16,7 +16,7 @@ const Title = styled.h1`
 export default function Home() {
   return (
     <Container>
-      <Title>Welcome to my Next.js app!</Title>
+      <Title>Welcome to PicJudge xD</Title>
       <ImageList />
     </Container>
   );
