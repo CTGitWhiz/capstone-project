@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>Capstone Project</title>
         <meta
-          name="description"
+          name="PicJudge"
           content="PicJudge is a website that allows users to view and judge images."
         />
       </Head>
