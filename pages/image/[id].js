@@ -159,28 +159,28 @@ const ImagePage = () => {
             value={rangeValues[2]}
             onChange={(event) => handleRangeChange(2, event.target.value)}
           />
-          <div>
-            <SliderLabel htmlFor="slider4">Slider 4</SliderLabel>
-            <RangeInput
-              type="range"
-              id="slider4"
-              min={0}
-              max={10}
-              value={rangeValues[3]}
-              onChange={(event) => handleRangeChange(3, event.target.value)}
-            />
-            <div>
-              <SliderLabel htmlFor="slider5">Slider 5</SliderLabel>
-              <RangeInput
-                type="range"
-                id="slider5"
-                min={0}
-                max={10}
-                value={rangeValues[4]}
-                onChange={(event) => handleRangeChange(4, event.target.value)}
-              />
-            </div>
-          </div>
+        </div>
+        <div>
+          <SliderLabel htmlFor="slider4">Slider 4</SliderLabel>
+          <RangeInput
+            type="range"
+            id="slider4"
+            min={0}
+            max={10}
+            value={rangeValues[3]}
+            onChange={(event) => handleRangeChange(3, event.target.value)}
+          />
+        </div>
+        <div>
+          <SliderLabel htmlFor="slider5">Slider 5</SliderLabel>
+          <RangeInput
+            type="range"
+            id="slider5"
+            min={0}
+            max={10}
+            value={rangeValues[4]}
+            onChange={(event) => handleRangeChange(4, event.target.value)}
+          />
         </div>
       </div>
       <ButtonWrapper>
