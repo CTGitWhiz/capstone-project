@@ -28,6 +28,7 @@ const ImageListWrapper = styled.div`
 `;
 
 const ImageList = () => {
+  // create an array of images with their source and id
   const images = Array.from({ length: 20 }, (_, i) => ({
     src: `/image${i + 1}.png`,
     id: i + 1, // use the image number as the id
@@ -35,6 +36,7 @@ const ImageList = () => {
 
   return (
     <ImageListWrapper>
+      {/* map through the images array and create a Link component for each image with its corresponding id */}
       {images.map(({ src, id }) => (
         <Link href={`/image/${id}`} key={id}>
           <ImageWrapper>

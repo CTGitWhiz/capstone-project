@@ -7,10 +7,15 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 1.5rem;
+  font-size: 3rem;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
+  margin: 0 auto 2rem auto;
+  color: #000000;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: #4caf50;
+  }
 `;
 
 export default function Home() {

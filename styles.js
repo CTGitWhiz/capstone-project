@@ -8,7 +8,9 @@ export default createGlobalStyle`
   }
   body {
     margin: 0;
-    font-family: system-ui;
+    padding: 0;
+    font-family:  'Open Sans', sans-serif;
+    min-height: 100vh;
     background: linear-gradient(to bottom, #ffffff, #000000);
   }
 `;
