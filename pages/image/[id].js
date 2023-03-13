@@ -2,6 +2,7 @@ import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { FiInfo } from "react-icons/fi";
 
 const ButtonWrapper = styled.div`
   display: flex;
@@ -16,6 +17,7 @@ const SliderButton = styled.button`
   background-color: #4caf50;
   color: #ffffff;
   margin-bottom: 20px;
+  margin-top: 10px;
   font-size: 16px;
   font-weight: bold;
   border-radius: 10px;
@@ -40,7 +42,7 @@ const RangeInput = styled.input`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 300px;
+  width: 200px;
   margin: 5px;
   margin-bottom: 10px;
   -webkit-appearance: none;
@@ -71,6 +73,52 @@ const RangeInput = styled.input`
   }
 `;
 
+const InfoIcon = styled(FiInfo)`
+  margin: auto;
+  font-size: 30px;
+  color: #ffcc00;
+  transition: transform 0.2s ease-in-out, color 0.4s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    color: #ffffff;
+  }
+
+  &:active {
+    color: #000000;
+  }
+`;
+
+const TooltipContainer = styled.div`
+  position: relative;
+  display: inline-block;
+  cursor: help;
+`;
+
+const TooltipText = styled.div`
+  visibility: ${(props) => (props.show ? "visible" : "hidden")};
+  width: 370px;
+  height: auto;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  opacity: 1;
+  font-size: 18px;
+  transition: visibility 0.3s, opacity 0.3s;
+  top: 23px;
+  left: 50%;
+  transform: translate(-50%, -100%);
+
+  strong {
+    color: #ffcc00;
+  }
+`;
+
 const ImagePage = () => {
   const router = useRouter(); // Initializing the useRouter hook
   const { id } = router.query; // Extracting the 'id' parameter from the router query
@@ -78,6 +126,12 @@ const ImagePage = () => {
 
   // Initializing state for the range values
   const [rangeValues, setRangeValues] = useState([0, 0, 0, 0, 0]);
+
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  const toggleTooltip = () => {
+    setShowTooltip(!showTooltip);
+  };
 
   useEffect(() => {
     // Retrieving range values from local storage
@@ -126,9 +180,43 @@ const ImagePage = () => {
         objectFit="contain"
         layout="intrinsic"
       />
+      <>
+        <TooltipContainer
+          onMouseEnter={toggleTooltip}
+          onMouseLeave={toggleTooltip}
+        >
+          <InfoIcon />
+          <TooltipText show={showTooltip}>
+            <strong>Creativity:</strong>
+            <br />
+            Measures the uniqueness and originality of the AI-generated image.
+            <br />
+            <br />
+            <strong>Technical Quality:</strong>
+            <br /> Evaluates the level of detail, clarity, and overall
+            craftsmanship of the image.
+            <br />
+            <br />
+            <strong>Emotional Impact:</strong>
+            <br /> Considers how well the image captures and conveys an
+            emotional tone or atmosphere.
+            <br />
+            <br />
+            <strong>Coherence:</strong>
+            <br /> Determines how well the various elements of the image fit
+            together harmoniously.
+            <br />
+            <br />
+            <strong>Realism:</strong>
+            <br /> Gauges how accurately and convincingly the image represents
+            its subject matter.
+            <br />
+          </TooltipText>
+        </TooltipContainer>
+      </>
       <div>
         <div>
-          <SliderLabel htmlFor="slider1">Slider 1</SliderLabel>
+          <SliderLabel htmlFor="slider1">Creativity</SliderLabel>
           <RangeInput
             type="range"
             id="slider1"
@@ -139,7 +227,7 @@ const ImagePage = () => {
           />
         </div>
         <div>
-          <SliderLabel htmlFor="slider2">Slider 2</SliderLabel>
+          <SliderLabel htmlFor="slider2">Technical Quality</SliderLabel>
           <RangeInput
             type="range"
             id="slider2"
@@ -150,7 +238,7 @@ const ImagePage = () => {
           />
         </div>
         <div>
-          <SliderLabel htmlFor="slider3">Slider 3</SliderLabel>
+          <SliderLabel htmlFor="slider3">Emotional Impact</SliderLabel>
           <RangeInput
             type="range"
             id="slider3"
@@ -161,7 +249,7 @@ const ImagePage = () => {
           />
         </div>
         <div>
-          <SliderLabel htmlFor="slider4">Slider 4</SliderLabel>
+          <SliderLabel htmlFor="slider4">Coherence</SliderLabel>
           <RangeInput
             type="range"
             id="slider4"
@@ -172,7 +260,7 @@ const ImagePage = () => {
           />
         </div>
         <div>
-          <SliderLabel htmlFor="slider5">Slider 5</SliderLabel>
+          <SliderLabel htmlFor="slider5">Realism</SliderLabel>
           <RangeInput
             type="range"
             id="slider5"
