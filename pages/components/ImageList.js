@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import Image from "next/legacy/image";
 import Link from "next/link";
+import { GoX } from "react-icons/go";
 
 const ImageWrapper = styled.div`
   width: auto;
   height: auto;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,6 +29,23 @@ const ImageListWrapper = styled.div`
   background: linear-gradient(to bottom, #444444, #ffffff);
 `;
 
+const DeleteIcon = styled(GoX)`
+  font-size: 30px;
+  color: #ffcc00;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid white;
+  outline: 1px solid black;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+`;
+
 // Create an ImageList functional component that will return a list of images displayed inside the ImageListWrapper component
 const ImageList = () => {
   // create an array of images with their source and id
@@ -44,12 +63,15 @@ const ImageList = () => {
             <Image
               src={src}
               alt={`My Image ${id}`}
-              width={180}
-              height={200}
-              objectFit="contain"
+              objectFit="cover"
               layout="intrinsic"
               priority={id < 4}
+              width={1000}
+              height={1000}
+              max-width="100%"
+              max-height="100%"
             />
+            <DeleteIcon />
           </ImageWrapper>
         </Link>
       ))}

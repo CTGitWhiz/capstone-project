@@ -187,8 +187,10 @@ const ImagePage = () => {
       <Image
         src={imageUrl}
         alt={`My Image ${id}`}
-        width={500}
-        height={500}
+        width={1000}
+        height={1000}
+        max-width="100%"
+        max-height="100%"
         objectFit="contain"
         layout="intrinsic"
       />
