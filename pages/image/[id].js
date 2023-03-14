@@ -98,25 +98,27 @@ const TooltipContainer = styled.div`
 
 const TooltipText = styled.div`
   visibility: ${(props) => (props.show ? "visible" : "hidden")};
-  width: 370px;
+  width: 350px;
   height: auto;
   background-color: #333;
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 10px;
   position: absolute;
-  z-index: 1;
-  opacity: 1;
-  font-size: 18px;
-  transition: visibility 0.3s, opacity 0.3s;
-  top: 30px;
   left: 50%;
   transform: translate(-50%, -100%);
+`;
 
-  strong {
-    color: #ffcc00;
-  }
+const TooltipTitle = styled.h2`
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffcc00;
+`;
+
+const TooltipTextItem = styled.p`
+  font-size: 14px;
+  margin-bottom: 20px;
+  margin-top: -10px;
 `;
 
 const ImagePage = () => {
@@ -198,30 +200,30 @@ const ImagePage = () => {
         >
           <InfoIcon />
           <TooltipText show={showTooltip}>
-            <strong>Creativity:</strong>
-            <br />
-            Measures the uniqueness and originality of the AI-generated image.
-            <br />
-            <br />
-            <strong>Technical Quality:</strong>
-            <br /> Evaluates the level of detail, clarity, and overall
-            craftsmanship of the image.
-            <br />
-            <br />
-            <strong>Emotional Impact:</strong>
-            <br /> Considers how well the image captures and conveys an
-            emotional tone or atmosphere.
-            <br />
-            <br />
-            <strong>Coherence:</strong>
-            <br /> Determines how well the various elements of the image fit
-            together harmoniously.
-            <br />
-            <br />
-            <strong>Realism:</strong>
-            <br /> Gauges how accurately and convincingly the image represents
-            its subject matter.
-            <br />
+            <TooltipTitle>Creativity:</TooltipTitle>
+            <TooltipTextItem>
+              Measures the uniqueness and originality of the AI-generated image.
+            </TooltipTextItem>
+            <TooltipTitle>Technical Quality:</TooltipTitle>
+            <TooltipTextItem>
+              Evaluates the level of detail, clarity, and overall craftsmanship
+              of the image.
+            </TooltipTextItem>
+            <TooltipTitle>Emotional Impact:</TooltipTitle>
+            <TooltipTextItem>
+              Considers how well the image captures and conveys an emotional
+              tone or atmosphere.
+            </TooltipTextItem>
+            <TooltipTitle>Coherence:</TooltipTitle>
+            <TooltipTextItem>
+              Determines how well the various elements of the image fit together
+              harmoniously.
+            </TooltipTextItem>
+            <TooltipTitle>Realism:</TooltipTitle>
+            <TooltipTextItem>
+              Gauges how accurately and convincingly the image represents its
+              subject matter.
+            </TooltipTextItem>
           </TooltipText>
         </TooltipContainer>
       </>
