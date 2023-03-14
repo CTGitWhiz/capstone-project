@@ -27,6 +27,7 @@ const ImageListWrapper = styled.div`
   background: linear-gradient(to bottom, #444444, #ffffff);
 `;
 
+// Create an ImageList functional component that will return a list of images displayed inside the ImageListWrapper component
 const ImageList = () => {
   // create an array of images with their source and id
   const images = Array.from({ length: 20 }, (_, i) => ({
