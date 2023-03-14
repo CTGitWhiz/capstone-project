@@ -79,14 +79,13 @@ const InfoIcon = styled(FiInfo)`
   color: #ffcc00;
   transition: transform 0.2s ease-in-out, color 0.4s ease-in-out;
 
-  &:hover {
-    transform: scale(1.1);
-    cursor: pointer;
+  &:active {
+    transform: scale(2);
     color: #ffffff;
   }
 
-  &:active {
-    color: #000000;
+  &:focus {
+    outline: none;
   }
 `;
 
@@ -105,18 +104,19 @@ const TooltipText = styled.div`
   text-align: center;
   border-radius: 6px;
   position: absolute;
+  top: -10px;
   left: 50%;
   transform: translate(-50%, -100%);
 `;
 
 const TooltipTitle = styled.h2`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: #ffcc00;
 `;
 
 const TooltipTextItem = styled.p`
-  font-size: 14px;
+  font-size: 12px;
   margin-bottom: 20px;
   margin-top: -10px;
 `;
@@ -197,6 +197,9 @@ const ImagePage = () => {
         <TooltipContainer
           onMouseEnter={toggleTooltip}
           onMouseLeave={toggleTooltip}
+          onFocus={toggleTooltip}
+          onBlur={toggleTooltip}
+          tabIndex="0"
         >
           <InfoIcon />
           <TooltipText show={showTooltip}>
