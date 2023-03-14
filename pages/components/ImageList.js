@@ -39,11 +39,10 @@ const DeleteIcon = styled(GoX)`
   border: 1px solid white;
   outline: 1px solid black;
   background-color: white;
-  transition: all 0.3s ease-in-out;
-
   position: absolute;
   bottom: -5px;
   right: -5px;
+  transform: scale(1.6);
 `;
 
 // Create an ImageList functional component that will return a list of images displayed inside the ImageListWrapper component
