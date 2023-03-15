@@ -1,8 +1,8 @@
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import styled from "styled-components";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { GoX } from "react-icons/go";
-import { useState, useEffect } from "react";
 
 const ImageWrapper = styled.div`
   width: auto;
@@ -58,16 +58,33 @@ const ImageContainer = styled.div`
 const ImageList = ({ images }) => {
   const [imageList, setImageList] = useState(images);
 
-  const handleDelete = (event, id) => {
-    event.preventDefault();
-    setImageList((prevImages) => prevImages.filter((image) => image.id !== id));
-  };
+  const handleDelete = useCallback(
+    (event, id) => {
+      event.preventDefault();
+      setImageList((prevImages) =>
+        prevImages.filter((image) => image.id !== id)
+      );
+      const updatedImageList = imageList.filter((image) => image.id !== id);
+      localStorage.setItem("images", JSON.stringify(updatedImageList));
+    },
+    [imageList]
+  );
+
+  const setLocalStorage = useMemo(
+    () => () => {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("images", JSON.stringify(imageList));
+      }
+    },
+    [imageList]
+  );
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("images", JSON.stringify(imageList));
+    const savedImages = JSON.parse(localStorage.getItem("images"));
+    if (savedImages) {
+      setImageList(savedImages);
     }
-  }, [imageList]);
+  }, []);
 
   return (
     <ImageListWrapper>
@@ -80,12 +97,9 @@ const ImageList = ({ images }) => {
                 src={src}
                 alt={`My Image ${id}`}
                 objectFit="cover"
-                layout="intrinsic"
                 priority={id < 4}
                 width={1000}
                 height={1000}
-                max-width="100%"
-                max-height="100%"
               />
               <DeleteIcon onClick={(event) => handleDelete(event, id)} />
             </ImageWrapper>
