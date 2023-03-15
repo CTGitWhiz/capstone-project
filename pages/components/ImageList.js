@@ -54,9 +54,8 @@ const ImageContainer = styled.div`
   position: relative;
 `;
 
-// Add images prop to the function arguments
 const ImageList = ({ images }) => {
-  const [imageList, setImageList] = useState(images);
+  const [imageList, setImageList] = useState(images || []);
 
   const handleDelete = useCallback(
     (event, id) => {
@@ -88,24 +87,25 @@ const ImageList = ({ images }) => {
 
   return (
     <ImageListWrapper>
-      {/* Map the imageList array passed as props */}
-      {imageList.map(({ src, id }) => (
-        <ImageContainer key={id}>
-          <Link href={`/image/${id}`}>
-            <ImageWrapper>
-              <Image
-                src={src}
-                alt={`My Image ${id}`}
-                objectFit="cover"
-                priority={id < 4}
-                width={1000}
-                height={1000}
-              />
-              <DeleteIcon onClick={(event) => handleDelete(event, id)} />
-            </ImageWrapper>
-          </Link>
-        </ImageContainer>
-      ))}
+      {/* Check if imageList is defined before calling map() */}
+      {imageList &&
+        imageList.map(({ src, id }) => (
+          <ImageContainer key={id}>
+            <Link href={`/image/${id}`}>
+              <ImageWrapper>
+                <Image
+                  src={src}
+                  alt={`My Image ${id}`}
+                  objectFit="cover"
+                  priority={id < 4}
+                  width={1000}
+                  height={1000}
+                />
+                <DeleteIcon onClick={(event) => handleDelete(event, id)} />
+              </ImageWrapper>
+            </Link>
+          </ImageContainer>
+        ))}
     </ImageListWrapper>
   );
 };
