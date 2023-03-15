@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { GoX } from "react-icons/go";
+import { useState, useEffect } from "react";
 
 const ImageWrapper = styled.div`
   width: auto;
@@ -43,36 +44,73 @@ const DeleteIcon = styled(GoX)`
   bottom: -5px;
   right: -5px;
   transform: scale(1.6);
+  cursor: pointer;
+  &:active {
+    background-color: red;
+  }
 `;
+
+const ImageContainer = styled.div`
+  position: relative;
+`;
+
+const getImages = () => {
+  if (typeof window === "undefined") {
+    // Server-side rendering
+    return Array.from({ length: 20 }, (_, i) => ({
+      src: `/image${i + 1}.png`,
+      alt: `My Image ${i + 1}`, // Add a consistent alt value
+      id: i + 1,
+    }));
+  }
+
+  // Client-side rendering
+  const storedImages = localStorage.getItem("images");
+  if (storedImages) {
+    return JSON.parse(storedImages);
+  }
+  return Array.from({ length: 20 }, (_, i) => ({
+    src: `/image${i + 1}.png`,
+    alt: `My Image ${i + 1}`, // Add a consistent alt value
+    id: i + 1,
+  }));
+};
 
 // Create an ImageList functional component that will return a list of images displayed inside the ImageListWrapper component
 const ImageList = () => {
-  // create an array of images with their source and id
-  const images = Array.from({ length: 20 }, (_, i) => ({
-    src: `/image${i + 1}.png`,
-    id: i + 1, // use the image number as the id
-  }));
+  const [images, setImages] = useState(getImages());
+  const handleDelete = (event, id) => {
+    event.preventDefault();
+    setImages((prevImages) => prevImages.filter((image) => image.id !== id));
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("images", JSON.stringify(images));
+    }
+  }, [images]);
 
   return (
     <ImageListWrapper>
-      {/* map through the images array and create a Link component for each image with its corresponding id */}
       {images.map(({ src, id }) => (
-        <Link href={`/image/${id}`} key={id}>
-          <ImageWrapper>
-            <Image
-              src={src}
-              alt={`My Image ${id}`}
-              objectFit="cover"
-              layout="intrinsic"
-              priority={id < 4}
-              width={1000}
-              height={1000}
-              max-width="100%"
-              max-height="100%"
-            />
-            <DeleteIcon />
-          </ImageWrapper>
-        </Link>
+        <ImageContainer key={id}>
+          <Link href={`/image/${id}`}>
+            <ImageWrapper>
+              <Image
+                src={src}
+                alt={`My Image ${id}`}
+                objectFit="cover"
+                layout="intrinsic"
+                priority={id < 4}
+                width={1000}
+                height={1000}
+                max-width="100%"
+                max-height="100%"
+              />
+              <DeleteIcon onClick={(event) => handleDelete(event, id)} />
+            </ImageWrapper>
+          </Link>
+        </ImageContainer>
       ))}
     </ImageListWrapper>
   );
