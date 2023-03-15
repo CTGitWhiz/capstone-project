@@ -54,45 +54,25 @@ const ImageContainer = styled.div`
   position: relative;
 `;
 
-const getImages = () => {
-  if (typeof window === "undefined") {
-    // Server-side rendering
-    return Array.from({ length: 20 }, (_, i) => ({
-      src: `/image${i + 1}.png`,
-      alt: `My Image ${i + 1}`, // Add a consistent alt value
-      id: i + 1,
-    }));
-  }
+// Add images prop to the function arguments
+const ImageList = ({ images }) => {
+  const [imageList, setImageList] = useState(images);
 
-  // Client-side rendering
-  const storedImages = localStorage.getItem("images");
-  if (storedImages) {
-    return JSON.parse(storedImages);
-  }
-  return Array.from({ length: 20 }, (_, i) => ({
-    src: `/image${i + 1}.png`,
-    alt: `My Image ${i + 1}`, // Add a consistent alt value
-    id: i + 1,
-  }));
-};
-
-// Create an ImageList functional component that will return a list of images displayed inside the ImageListWrapper component
-const ImageList = () => {
-  const [images, setImages] = useState(getImages());
   const handleDelete = (event, id) => {
     event.preventDefault();
-    setImages((prevImages) => prevImages.filter((image) => image.id !== id));
+    setImageList((prevImages) => prevImages.filter((image) => image.id !== id));
   };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      localStorage.setItem("images", JSON.stringify(images));
+      localStorage.setItem("images", JSON.stringify(imageList));
     }
-  }, [images]);
+  }, [imageList]);
 
   return (
     <ImageListWrapper>
-      {images.map(({ src, id }) => (
+      {/* Map the imageList array passed as props */}
+      {imageList.map(({ src, id }) => (
         <ImageContainer key={id}>
           <Link href={`/image/${id}`}>
             <ImageWrapper>

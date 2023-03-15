@@ -18,11 +18,22 @@ const Title = styled.h1`
   }
 `;
 
-export default function Home() {
+export default function Home({ images }) {
   return (
     <Container>
       <Title>Welcome to PicJudge xD</Title>
-      <ImageList />
+      <ImageList images={images} />
     </Container>
   );
+}
+
+export async function getServerSideProps() {
+  const images = Array.from({ length: 20 }, (_, i) => ({
+    src: `/image${i + 1}.png`,
+    alt: `My Image ${i + 1}`,
+    id: i + 1,
+  }));
+
+  // Pass the images array as props to the Home component
+  return { props: { images } };
 }
