@@ -1,5 +1,5 @@
 // Importing required modules
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import Image from "next/legacy/image";
 import Link from "next/link";
@@ -71,16 +71,6 @@ const ImageList = ({ images }) => {
       );
       const updatedImageList = imageList.filter((image) => image.id !== id);
       localStorage.setItem("images", JSON.stringify(updatedImageList));
-    },
-    [imageList]
-  );
-
-  //Set local storage using useMemo Hook
-  const setLocalStorage = useMemo(
-    () => () => {
-      if (typeof window !== "undefined") {
-        localStorage.setItem("images", JSON.stringify(imageList));
-      }
     },
     [imageList]
   );
