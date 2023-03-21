@@ -166,10 +166,13 @@ export default function ImagePage() {
     // Retrieving existing range values from local storage
     const savedRangeValues = JSON.parse(localStorage.getItem("rangeValues"));
 
+    // Adding the current timestamp to the rangeValues array
+    const rangeValuesWithTimestamp = [...rangeValues, Date.now()];
+
     // Merging existing range values with the new range values for this image ID
     const updatedRangeValues = {
       ...savedRangeValues,
-      [id]: rangeValues,
+      [id]: rangeValuesWithTimestamp,
     };
 
     // Storing the updated range values to local storage

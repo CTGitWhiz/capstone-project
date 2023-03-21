@@ -48,28 +48,44 @@ const categories = [
   "Realism",
 ];
 
+function getClientSideRangeValues() {
+  if (typeof window === "undefined") {
+    return null;
+  }
+  return JSON.stringify(localStorage.getItem("rangeValues"));
+}
+
 export default function Supreme() {
   const [topRatedImages, setTopRatedImages] = useState([]);
 
-  // effect hook to update state based on saved range values in localStorage
   useEffect(() => {
+    if (!getClientSideRangeValues()) {
+      return;
+    }
+
     const savedRangeValues =
       JSON.parse(localStorage.getItem("rangeValues")) || {};
 
     if (Object.keys(savedRangeValues).length === 0) {
-      // If no ratings have been saved, exit the effect
       return;
     }
 
     const highestRatedImages = categories.map((_, index) => {
       let highestRatedImageId = null;
       let highestRating = -1;
+      let latestTimestamp = 0;
 
       for (const imageId in savedRangeValues) {
         const rating = parseInt(savedRangeValues[imageId][index]);
-        if (rating > highestRating) {
+        const timestamp = savedRangeValues[imageId][5];
+
+        if (
+          rating > highestRating ||
+          (rating === highestRating && timestamp > latestTimestamp)
+        ) {
           highestRating = rating;
           highestRatedImageId = imageId;
+          latestTimestamp = timestamp;
         }
       }
 
@@ -77,17 +93,15 @@ export default function Supreme() {
     });
 
     setTopRatedImages(highestRatedImages);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getClientSideRangeValues()]);
 
   return (
     <SupremeContainer>
       <SupremeTitle>Top-Rated Images Showcase</SupremeTitle>
-      {/* loop through top rated images and display each */}
       {topRatedImages.map(({ categoryIndex, imageId }) => (
         <div key={categoryIndex}>
-          {/* Display category title */}
           <CategoryTitle>{categories[categoryIndex]}</CategoryTitle>
-          {/* Display image if it exists */}
           {imageId && (
             <ImageContainer>
               <Image
