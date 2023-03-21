@@ -1,5 +1,6 @@
 import GlobalStyle from "@/styles";
 import Head from "next/head";
+import Navigation from "./components/Navigation";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -8,10 +9,11 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>Capstone Project</title>
         <meta
-          name="PicJudge"
-          content="PicJudge is a website that allows users to view and judge images."
+          name="PICJUDGE"
+          content="PICJUDGE is a website that allows users to view and judge images."
         />
       </Head>
+      <Navigation />
       <Component {...pageProps} />
     </>
   );

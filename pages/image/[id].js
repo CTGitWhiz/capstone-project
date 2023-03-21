@@ -36,6 +36,7 @@ const ImagePageWrapper = styled.div`
   align-items: center;
   padding: 5px;
   gap: 20px;
+  padding-top: 80px;
 `;
 
 const RangeInput = styled.input`
@@ -121,7 +122,7 @@ const TooltipTextItem = styled.p`
   margin-top: -10px;
 `;
 
-const ImagePage = () => {
+export default function ImagePage() {
   // Importing router hook for navigation within the app
   const router = useRouter();
 
@@ -297,6 +298,4 @@ const ImagePage = () => {
       </ButtonWrapper>
     </ImagePageWrapper>
   );
-};
-
-export default ImagePage;
+}
