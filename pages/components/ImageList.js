@@ -63,12 +63,20 @@ export default function ImageList({ images }) {
   const handleDelete = useCallback(
     (event, id) => {
       event.preventDefault();
-      //Filter out the deleted image and update image list using prevImages argument of setState method
+      // Filter out the deleted image and update image list using prevImages argument of setState method
       setImageList((prevImages) =>
         prevImages.filter((image) => image.id !== id)
       );
       const updatedImageList = imageList.filter((image) => image.id !== id);
       localStorage.setItem("images", JSON.stringify(updatedImageList));
+
+      // Remove the deleted image's range values from local storage
+      const savedRangeValues =
+        JSON.parse(localStorage.getItem("rangeValues")) || {};
+      if (savedRangeValues[id]) {
+        delete savedRangeValues[id];
+        localStorage.setItem("rangeValues", JSON.stringify(savedRangeValues));
+      }
     },
     [imageList]
   );
