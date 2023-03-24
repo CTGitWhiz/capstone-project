@@ -76,7 +76,7 @@ const RangeInput = styled.input`
 
 const InfoIcon = styled(FiInfo)`
   margin: auto;
-  font-size: 30px;
+  font-size: 40px;
   color: #ffcc00;
   transition: transform 0.2s ease-in-out, color 0.4s ease-in-out;
 
@@ -94,6 +94,7 @@ const TooltipContainer = styled.div`
   position: relative;
   display: inline-block;
   cursor: help;
+  touch-action: manipulation;
 `;
 
 const TooltipText = styled.div`
@@ -141,6 +142,11 @@ export default function ImagePage() {
   // Toggles between display/hide of tooltips
   const toggleTooltip = () => {
     setShowTooltip(!showTooltip);
+  };
+
+  const handleTouchEnd = (e) => {
+    e.preventDefault();
+    toggleTooltip();
   };
 
   // useEffect hook - Runs on the initialization of the component, extracts and updates the saved range values from Local Storage.
@@ -198,7 +204,6 @@ export default function ImagePage() {
         height={1000}
         objectFit="contain"
         layout="intrinsic"
-        style={{ maxWidth: "100%", maxHeight: "100%" }}
       />
 
       <>
@@ -206,8 +211,7 @@ export default function ImagePage() {
         <TooltipContainer
           onMouseEnter={toggleTooltip}
           onMouseLeave={toggleTooltip}
-          onFocus={toggleTooltip}
-          onBlur={toggleTooltip}
+          onTouchEnd={handleTouchEnd}
           tabIndex="0"
         >
           <InfoIcon />
