@@ -179,7 +179,9 @@ export default function ImagePage() {
     // Storing the updated range values to local storage
     localStorage.setItem("rangeValues", JSON.stringify(updatedRangeValues));
 
-    alert("Values saved!");
+    alert(
+      "Congratulations, you just made that AI feel all warm and fuzzy inside. Values saved!"
+    );
 
     // Redirect to homepage
     router.push("/");
@@ -194,11 +196,11 @@ export default function ImagePage() {
         alt={`My Image ${id}`}
         width={1000}
         height={1000}
-        max-width="100%"
-        max-height="100%"
         objectFit="contain"
         layout="intrinsic"
+        style={{ maxWidth: "100%", maxHeight: "100%" }}
       />
+
       <>
         {/* Tooltip element shown when InfoIcon is hovered over */}
         <TooltipContainer
@@ -211,7 +213,7 @@ export default function ImagePage() {
           <InfoIcon />
           <TooltipText show={showTooltip}>
             <TooltipTitle>Creativity:</TooltipTitle>
-            <TooltipTextItem>
+            <TooltipTextItem key="creativity">
               Measures the uniqueness and originality of the AI-generated image.
             </TooltipTextItem>
             <TooltipTitle>Technical Quality:</TooltipTitle>
@@ -220,17 +222,17 @@ export default function ImagePage() {
               of the image.
             </TooltipTextItem>
             <TooltipTitle>Emotional Impact:</TooltipTitle>
-            <TooltipTextItem>
+            <TooltipTextItem key="emotional_impact">
               Considers how well the image captures and conveys an emotional
               tone or atmosphere.
             </TooltipTextItem>
             <TooltipTitle>Coherence:</TooltipTitle>
-            <TooltipTextItem>
+            <TooltipTextItem key="coherence">
               Determines how well the various elements of the image fit together
               harmoniously.
             </TooltipTextItem>
             <TooltipTitle>Realism:</TooltipTitle>
-            <TooltipTextItem>
+            <TooltipTextItem key="realism">
               Gauges how accurately and convincingly the image represents its
               subject matter.
             </TooltipTextItem>

@@ -37,11 +37,11 @@ const NavItem = styled.span`
 export default function Navigation() {
   return (
     <Nav>
-      <Link href="/">
-        <NavItem>[PicJudge]</NavItem>
+      <Link href="/" aria-label="PicJudge Home">
+        <NavItem>[Home]</NavItem>
       </Link>
-      <Link href="/supreme">
-        <NavItem>[Supreme]</NavItem>
+      <Link href="/supreme" aria-label="Supreme Page">
+        <NavItem>[Supreme Gallery]</NavItem>
       </Link>
     </Nav>
   );

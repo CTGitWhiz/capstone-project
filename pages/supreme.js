@@ -39,7 +39,15 @@ const ImageContainer = styled.div`
   padding: 10px;
 `;
 
-// array containing categories to be displayed
+const NoImageMessage = styled.div`
+  font-size: 14px;
+  font-weight: bold;
+  color: #555555;
+  margin-bottom: 20px;
+  text-align: center;
+`;
+
+// Categories array
 const categories = [
   "Creativity",
   "Technical Quality",
@@ -50,7 +58,6 @@ const categories = [
 
 // Function to check if the code is running in a client-side environment and get the range values
 function getClientSideRangeValues() {
-  // If the window object is undefined, return null
   if (typeof window === "undefined") {
     return null;
   }
@@ -58,7 +65,8 @@ function getClientSideRangeValues() {
   return JSON.stringify(localStorage.getItem("rangeValues"));
 }
 
-export default function Supreme() {
+// Custom hook to get top rated images
+function useTopRatedImages() {
   const [topRatedImages, setTopRatedImages] = useState([]);
 
   // useEffect hook to load top-rated images when the component is mounted or range values change
@@ -80,7 +88,7 @@ export default function Supreme() {
     // Find the highest-rated images for each category
     const highestRatedImages = categories.map((_, index) => {
       let highestRatedImageId = null;
-      let highestRating = 0; // Change the initial value of highestRating to 0
+      let highestRating = 0;
       let latestTimestamp = 0;
 
       // Iterate over the saved range values and find the highest-rated image
@@ -108,6 +116,36 @@ export default function Supreme() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getClientSideRangeValues()]);
 
+  return topRatedImages;
+}
+
+// Functional component to display the image or a message if no image is found for the category
+function SupremeImage({ categoryIndex, imageId }) {
+  if (imageId) {
+    return (
+      <ImageContainer>
+        <Image
+          src={`/image${imageId}.png`}
+          alt={`My Image ${imageId}`}
+          width={1000}
+          height={1000}
+          objectFit="cover"
+        />
+      </ImageContainer>
+    );
+  } else {
+    return (
+      <NoImageMessage>
+        Oops, looks like this category has not been rated yet, no image to show!
+      </NoImageMessage>
+    );
+  }
+}
+
+// Main component
+export default function Supreme() {
+  const topRatedImages = useTopRatedImages();
+
   // Render the top-rated images showcase
   return (
     <SupremeContainer>
@@ -115,17 +153,7 @@ export default function Supreme() {
       {topRatedImages.map(({ categoryIndex, imageId }) => (
         <div key={categoryIndex}>
           <CategoryTitle>{categories[categoryIndex]}</CategoryTitle>
-          {imageId && (
-            <ImageContainer>
-              <Image
-                src={`/image${imageId}.png`}
-                alt={`My Image ${imageId}`}
-                width={1000}
-                height={1000}
-                objectFit="cover"
-              />
-            </ImageContainer>
-          )}
+          <SupremeImage categoryIndex={categoryIndex} imageId={imageId} />
         </div>
       ))}
     </SupremeContainer>

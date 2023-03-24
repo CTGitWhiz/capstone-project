@@ -104,12 +104,15 @@ export default function ImageList({ images }) {
                   src={src}
                   alt={`My Image ${id}`}
                   objectFit="cover"
-                  priority={id < 4}
+                  priority={id < 20}
                   width={1000}
                   height={1000}
                 />
                 {/* Delete Icon added in each ImageWrapper */}
-                <DeleteIcon onClick={(event) => handleDelete(event, id)} />
+                <DeleteIcon
+                  onClick={(event) => handleDelete(event, id)}
+                  aria-label="Delete image"
+                />
               </ImageWrapper>
             </Link>
           </ImageContainer>
