@@ -1,11 +1,9 @@
-// Importing required modules
 import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { GoX } from "react-icons/go";
 
-// Styling Components Using Styled components module
 const ImageWrapper = styled.div`
   width: auto;
   height: auto;
@@ -57,7 +55,7 @@ const ImageContainer = styled.div`
 `;
 
 //Image List Component
-const ImageList = ({ images }) => {
+export default function ImageList({ images }) {
   //Set initial state for imageList using useState hook
   const [imageList, setImageList] = useState(images || []);
 
@@ -65,12 +63,20 @@ const ImageList = ({ images }) => {
   const handleDelete = useCallback(
     (event, id) => {
       event.preventDefault();
-      //Filter out the deleted image and update image list using prevImages argument of setState method
+      // Filter out the deleted image and update image list using prevImages argument of setState method
       setImageList((prevImages) =>
         prevImages.filter((image) => image.id !== id)
       );
       const updatedImageList = imageList.filter((image) => image.id !== id);
       localStorage.setItem("images", JSON.stringify(updatedImageList));
+
+      // Remove the deleted image's range values from local storage
+      const savedRangeValues =
+        JSON.parse(localStorage.getItem("rangeValues")) || {};
+      if (savedRangeValues[id]) {
+        delete savedRangeValues[id];
+        localStorage.setItem("rangeValues", JSON.stringify(savedRangeValues));
+      }
     },
     [imageList]
   );
@@ -95,22 +101,22 @@ const ImageList = ({ images }) => {
               <ImageWrapper>
                 {/* Use next/image component to render each image */}
                 <Image
-                  src={src} //Image source URL
+                  src={src}
                   alt={`My Image ${id}`}
-                  objectFit="cover" //Image fit type
-                  priority={id < 4} //Loading priority for an individual picture
-                  width={1000} //Width of image
-                  height={1000} //Height of image
+                  objectFit="cover"
+                  priority={id < 20}
+                  width={1000}
+                  height={1000}
                 />
                 {/* Delete Icon added in each ImageWrapper */}
-                <DeleteIcon onClick={(event) => handleDelete(event, id)} />
+                <DeleteIcon
+                  onClick={(event) => handleDelete(event, id)}
+                  aria-label="Delete image"
+                />
               </ImageWrapper>
             </Link>
           </ImageContainer>
         ))}
     </ImageListWrapper>
   );
-};
-
-//Export Image List component as default export
-export default ImageList;
+}

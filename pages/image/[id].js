@@ -36,6 +36,7 @@ const ImagePageWrapper = styled.div`
   align-items: center;
   padding: 5px;
   gap: 20px;
+  padding-top: 80px;
 `;
 
 const RangeInput = styled.input`
@@ -75,7 +76,7 @@ const RangeInput = styled.input`
 
 const InfoIcon = styled(FiInfo)`
   margin: auto;
-  font-size: 30px;
+  font-size: 40px;
   color: #ffcc00;
   transition: transform 0.2s ease-in-out, color 0.4s ease-in-out;
 
@@ -93,6 +94,7 @@ const TooltipContainer = styled.div`
   position: relative;
   display: inline-block;
   cursor: help;
+  touch-action: manipulation;
 `;
 
 const TooltipText = styled.div`
@@ -121,7 +123,7 @@ const TooltipTextItem = styled.p`
   margin-top: -10px;
 `;
 
-const ImagePage = () => {
+export default function ImagePage() {
   // Importing router hook for navigation within the app
   const router = useRouter();
 
@@ -142,6 +144,11 @@ const ImagePage = () => {
     setShowTooltip(!showTooltip);
   };
 
+  const handleTouchEnd = (e) => {
+    e.preventDefault();
+    toggleTooltip();
+  };
+
   // useEffect hook - Runs on the initialization of the component, extracts and updates the saved range values from Local Storage.
   useEffect(() => {
     // Retrieving range values from local storage
@@ -160,21 +167,27 @@ const ImagePage = () => {
     setRangeValues(newRangeValues);
   };
 
-  // Function to handle saving the range values to local storage
+  // Function to handle saving the range values to local storage for the current image
   const handleSave = () => {
-    // Retrieving existing range values from local storage
-    const savedRangeValues = JSON.parse(localStorage.getItem("rangeValues"));
+    // Retrieve existing range values from local storage, or initialize an empty object if they don't exist
+    const savedRangeValues =
+      JSON.parse(localStorage.getItem("rangeValues")) || {};
+
+    // Adding the current timestamp to the rangeValues array
+    const rangeValuesWithTimestamp = [...rangeValues, Date.now()];
 
     // Merging existing range values with the new range values for this image ID
     const updatedRangeValues = {
       ...savedRangeValues,
-      [id]: rangeValues,
+      [id]: rangeValuesWithTimestamp,
     };
 
     // Storing the updated range values to local storage
     localStorage.setItem("rangeValues", JSON.stringify(updatedRangeValues));
 
-    alert("Values saved!");
+    alert(
+      "Congratulations, you just made that AI feel all warm and fuzzy inside. Values saved!"
+    );
 
     // Redirect to homepage
     router.push("/");
@@ -189,24 +202,22 @@ const ImagePage = () => {
         alt={`My Image ${id}`}
         width={1000}
         height={1000}
-        max-width="100%"
-        max-height="100%"
         objectFit="contain"
         layout="intrinsic"
       />
+
       <>
         {/* Tooltip element shown when InfoIcon is hovered over */}
         <TooltipContainer
           onMouseEnter={toggleTooltip}
           onMouseLeave={toggleTooltip}
-          onFocus={toggleTooltip}
-          onBlur={toggleTooltip}
+          onTouchEnd={handleTouchEnd}
           tabIndex="0"
         >
           <InfoIcon />
           <TooltipText show={showTooltip}>
             <TooltipTitle>Creativity:</TooltipTitle>
-            <TooltipTextItem>
+            <TooltipTextItem key="creativity">
               Measures the uniqueness and originality of the AI-generated image.
             </TooltipTextItem>
             <TooltipTitle>Technical Quality:</TooltipTitle>
@@ -215,17 +226,17 @@ const ImagePage = () => {
               of the image.
             </TooltipTextItem>
             <TooltipTitle>Emotional Impact:</TooltipTitle>
-            <TooltipTextItem>
+            <TooltipTextItem key="emotional_impact">
               Considers how well the image captures and conveys an emotional
               tone or atmosphere.
             </TooltipTextItem>
             <TooltipTitle>Coherence:</TooltipTitle>
-            <TooltipTextItem>
+            <TooltipTextItem key="coherence">
               Determines how well the various elements of the image fit together
               harmoniously.
             </TooltipTextItem>
             <TooltipTitle>Realism:</TooltipTitle>
-            <TooltipTextItem>
+            <TooltipTextItem key="realism">
               Gauges how accurately and convincingly the image represents its
               subject matter.
             </TooltipTextItem>
@@ -297,6 +308,4 @@ const ImagePage = () => {
       </ButtonWrapper>
     </ImagePageWrapper>
   );
-};
-
-export default ImagePage;
+}
