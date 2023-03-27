@@ -1,51 +1,13 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 import Image from "next/legacy/image";
 
-const SupremeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  margin-top: 60px;
-  box-shadow: 0 0 10px rgba(128, 128, 128, 0.5),
-    0 0 20px rgba(128, 128, 128, 0.4), 0 0 30px rgba(128, 128, 128, 0.3),
-    0 0 40px rgba(128, 128, 128, 0.2), 0 0 50px rgba(128, 128, 128, 0.1),
-    0 0 60px rgba(128, 128, 128, 0), 0 0 70px rgba(255, 255, 255, 0);
-  background: linear-gradient(to bottom, #ffffff, #444444);
-`;
-
-const SupremeTitle = styled.h1`
-  font-size: 26px;
-  font-weight: bold;
-  color: #000000;
-  white-space: nowrap;
-`;
-
-const CategoryTitle = styled.h2`
-  font-size: 32px;
-  font-weight: bold;
-  color: #000000;
-  margin-bottom: 20px;
-  text-align: center;
-`;
-
-const ImageContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  padding: 10px;
-`;
-
-const NoImageMessage = styled.div`
-  font-size: 14px;
-  font-weight: bold;
-  color: #555555;
-  margin-bottom: 20px;
-  text-align: center;
-`;
+import {
+  SupremeContainer,
+  SupremeTitle,
+  CategoryTitle,
+  ImageContainer,
+  NoImageMessage,
+} from "@/styles/Supreme.styles.js";
 
 // Categories array
 const categories = [

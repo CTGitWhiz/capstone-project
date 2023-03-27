@@ -1,4 +1,4 @@
-import GlobalStyle from "@/styles";
+import GlobalStyle from "@/styles/GlobalStyles";
 import Head from "next/head";
 import Navigation from "./components/Navigation";
 
