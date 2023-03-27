@@ -1,5 +1,5 @@
 import ImageList from "./components/ImageList";
-import { Container, Title } from "@/styles/index.styles";
+import { Container, Title } from "../styles/index.styles";
 
 // Exporting a Home function which receives props and returns the JSX for the page
 export default function Home({ images }) {
