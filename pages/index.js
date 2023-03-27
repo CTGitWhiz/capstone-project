@@ -1,23 +1,5 @@
-import styled from "styled-components";
 import ImageList from "./components/ImageList";
-
-const Container = styled.div`
-  max-width: 100%;
-  padding: 20px;
-  padding-top: 80px;
-`;
-
-const Title = styled.h1`
-  font-size: 48px;
-  font-weight: bold;
-  text-align: center;
-  margin: 0 auto 32px auto;
-  color: #000000;
-  transition: all 0.2s ease-in-out;
-  &:hover {
-    color: #4caf50;
-  }
-`;
+import { Container, Title } from "@/styles/index.styles";
 
 // Exporting a Home function which receives props and returns the JSX for the page
 export default function Home({ images }) {
