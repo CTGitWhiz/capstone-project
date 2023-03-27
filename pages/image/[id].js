@@ -190,7 +190,7 @@ export default function ImagePage() {
     );
 
     // Redirect to homepage
-    router.push("/");
+    router.back();
   };
 
   return (
