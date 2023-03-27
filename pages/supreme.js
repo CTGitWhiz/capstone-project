@@ -7,7 +7,7 @@ import {
   CategoryTitle,
   ImageContainer,
   NoImageMessage,
-} from "../styles/Supreme.styles.js";
+} from "@/styles/Supreme.styles.js";
 
 // Categories array
 const categories = [
