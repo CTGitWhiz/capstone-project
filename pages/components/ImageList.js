@@ -6,7 +6,7 @@ import {
   ImageListWrapper,
   DeleteIcon,
   ImageContainer,
-} from "@/styles/ImageList.styles";
+} from "../../styles/ImageList.styles";
 
 //Image List Component
 export default function ImageList({ images }) {

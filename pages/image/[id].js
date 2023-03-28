@@ -12,7 +12,7 @@ import {
   TooltipText,
   TooltipTitle,
   TooltipTextItem,
-} from "@/styles/[id].styles";
+} from "../styles/[id].styles";
 
 export default function ImagePage() {
   // Importing router hook for navigation within the app
