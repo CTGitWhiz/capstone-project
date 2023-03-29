@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Nav, NavItem } from "@/styles/Navigation.styles";
+import { Nav, NavItem } from "../../styles/Navigation.styles";
 
 export default function Navigation() {
   return (
