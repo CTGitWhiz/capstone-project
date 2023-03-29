@@ -29,10 +29,5 @@
     "jest": "^29.4.3",
     "jest-environment-jsdom": "^29.4.3"
   },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "./setupTests.js"
-    ]
-  },
   "description": "Next.js Template (incl. Styled Components and Jest)"
 }
