@@ -23,8 +23,8 @@ The PICJUDGE project utilizes the following technologies:
 
 ### Getting Started
 
-Clone this repository
-Install all dependencies with $ npm install
-Run app in dev mode with $ npm run dev
-Server: http://localhost:3000/
-Run tests via $ npm run test
+- Clone this repository
+- Install all dependencies with $ npm install
+- Run app in dev mode with $ npm run dev
+- Server: http://localhost:3000/
+- Run tests via $ npm run test
