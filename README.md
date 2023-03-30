@@ -1,25 +1,27 @@
-Capstone Project: PICJUDGE
+# Capstone Project: PICJUDGE
 
-PICJUDGE - Explore & Rate AI Art Discover PicJudge, a platform showcasing diverse AI-generated art. Rate images in various categories, contribute to refining AI algorithms, and join the forefront of creativity and technology. Experience the future of AI art with PICJUDGE!
+## AI Art Discovery & Rating Platform
 
-![](../../Desktop/1.png) ![](../../Desktop/2.png)
+Welcome to **PICJUDGE**, a cutting-edge platform that showcases a diverse range of AI-generated art. Rate images across various categories, contribute to refining AI algorithms, and join the fusion of creativity and technology. Experience the future of AI art with PICJUDGE!
 
-Demo:
-You can find the hosted version on Vercel
-Important the project is optimized for mobile screen.
+### Live Demo
 
-Included Tech Stack:
+Check out the live demo of the project, hosted on Vercel [here](https://capstone-project-a1c4lcuni-ctgitwhiz.vercel.app/). Please note that the project is optimized for mobile screens.
 
-React
-React Router
-React Testing Library / Jest
-Next.js
-Node.js
-JavaScript
-Styled Components
-LocalStorage
+### Tech Stack
 
-How to setup?
+The PICJUDGE project utilizes the following technologies:
+
+- React
+- React Router
+- React Testing Library / Jest
+- Next.js
+- Node.js
+- JavaScript
+- Styled Components
+- LocalStorage
+
+### Getting Started
 
 Clone this repository
 Install all dependencies with $ npm install
