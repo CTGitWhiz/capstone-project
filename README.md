@@ -4,6 +4,9 @@
 
 Welcome to **PICJUDGE**, a cutting-edge platform that showcases a diverse range of AI-generated art. Rate images across various categories, contribute to refining AI algorithms, and join the fusion of creativity and technology. Experience the future of AI art with PICJUDGE!
 
+![1](https://user-images.githubusercontent.com/121774259/228800959-ba519b24-4928-46a9-8362-2776b161b5f3.png).   ![2](https://user-images.githubusercontent.com/121774259/228801004-4cc60a3e-65fa-4617-a037-dae7492933a4.png)
+
+
 ### Live Demo
 
 Check out the live demo of the project, hosted on Vercel [here](https://capstone-project-a1c4lcuni-ctgitwhiz.vercel.app/). Please note that the project is optimized for mobile screens.
